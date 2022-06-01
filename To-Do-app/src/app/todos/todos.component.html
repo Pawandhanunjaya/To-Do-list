@@ -1,0 +1,167 @@
+<mat-toolbar style="background-color: rgba(8, 13, 39, 0.527);">
+ 
+  <img src="../../assets/img/download (3).png" style="width: 50px; border-radius: 50%;" >
+  <h3 style="color:white">&nbsp;&nbsp;To-do List App</h3>
+
+    <span class="example-spacer"></span>
+    <div class="middle-box" >Welcome &nbsp; {{username}}</div>
+    <button mat-icon-button type="button" data-bs-toggle="tooltip" title="search" >
+      <mat-icon >search</mat-icon>&nbsp;
+      <select [(ngModel)]="search" style="background: none;color:white ">
+        <option style="background: rgb(114, 181, 226); color: white;" >All</option>
+        <option style="background: rgb(114, 181, 226); color: white;">Date</option>
+        <option style="background: rgb(114, 181, 226); color: white;">Title</option>
+        <option style="background: rgb(114, 181, 226); color:white;">Priority</option>
+      </select>
+    </button>
+    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+     
+        <div  *ngIf="search==='Date'"><input  type="date" [(ngModel)]="searchDate" (change)="searchBy()" style="background: none; color: white; bottom: none; height: 25px;font-size: small;"></div>
+        <div *ngIf="search==='Title'"><input class="col-sm-8" type="text" [(ngModel)]="searchTitle" style="background: none; color: white;height: 25px; font-size: small;" (keyup)="searchBy()" placeholder="search by title"></div>
+        <div *ngIf="search==='Priority'" class="col-sm-2" style="background: none;height: 25px; color:white;font-size: small;">
+          <select  [(ngModel)]="searchPriority" (change)="searchBy()"  class="col-sm-8" style="background: none;height: 25px; color:white;" placeholder="priority">
+            
+            <option style="background: rgb(114, 181, 226); color: white;" selected="selected">High</option>
+            <option style="background: rgb(114, 181, 226); color: white;" >Medium</option>
+            <option style="background: rgb(114, 181, 226); color: white;" >Low</option>
+           </select>
+        </div>
+      
+     
+      
+        
+  <button mat-icon-button type="button" (click)="toTask()" data-bs-toggle="tooltip" title="Add new task">
+    <mat-icon >add</mat-icon>
+  </button>
+  
+  <button mat-icon-button type="button"  matBadge='{{noOfIncomplete}}'  (click)="isBadgeHidden " (click)="openModal()" data-bs-toggle="tooltip" title="Notification" >
+    <mat-icon>notifications</mat-icon>
+  </button>
+  <button mat-icon-button type="button"routerLink="/login" data-bs-toggle="tooltip" title="Logout">
+    <mat-icon >logout</mat-icon> 
+  </button>
+</mat-toolbar>
+ <section class="heading-section" id="fluid-container">
+   <h1 class="title is-1 has-text-centered" style="font-size:50px;font-weight:700; color: lightblue;">To-do's</h1>
+    <div class="container"   *ngIf="search==='All'">
+    <div *ngFor="let t of taskList | paginate:{itemsPerPage: 5, currentPage:p}"  >
+      <div class="row" >
+        <div class="todo-item"  [ngClass]="{'highPriorityTask':t.priority==='High','mediumPriorityTask':t.priority==='Medium','lowPriorityTask':t.priority==='Low'}">
+            <div class="col-sm-3 col-md-2 col-lg-1">
+              <input  type="checkbox" data-bs-toggle="tooltip" title="click if task is completed"  class="check-box" (click)="openSnackBar('Tak Completed','Dismiss',t.taskid)">
+            </div>
+            
+            
+              
+                <div class="col-sm-3 col-md-2 col-lg-2">
+                  {{t.title}} 
+                </div> 
+                
+                <div class="col-sm-3 col-md-2 col-lg-3">
+                  {{t.date}}
+                </div> 
+                <div class="col-sm-3 col-md-2 col-lg-3">
+                  {{t.priority}}
+                </div>  
+                <div *ngIf="t.image?.length>0" class="col-sm-3 col-md-2 col-lg-3">
+                  <img [src]="t.image" height="150px" width="150px">
+                </div> 
+        
+                         
+              
+          
+            
+            <div class="todo-controls-box" >
+              <div class="todo-control-button" appToolTip="Edit Todo" >
+                <i class="material-icons" (click)="toEdit(t)">edit</i>
+              </div>
+              <div class="todo-control-button is-danger" appToolTip="Delete Todo" >
+               <i class="material-icons" (click)="deleteTask(t.taskid)">delete</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container"   *ngIf="search!=='All'">
+      <div *ngFor="let t of searchList | paginate:{itemsPerPage:5, currentPage:p}">
+        <div class="row">
+          <div class="todo-item"  [ngClass]="{'highPriorityTask':t.priority==='High','mediumPriorityTask':t.priority==='Medium','lowPriorityTask':t.priority==='Low'}">
+            <div class="col-sm-3 col-md-2 col-lg-1">
+              <input  type="checkbox" data-bs-toggle="tooltip" title="click if task is completed"  class="check-box" (click)="openSnackBar('Tak Completed','Dismiss',t.taskid)">
+            </div>
+            
+            
+              
+                <div class="col-sm-3 col-md-2 col-lg-2">
+                  {{t.title}} 
+                </div> 
+                
+                <div class="col-sm-3 col-md-2 col-lg-3">
+                  {{t.date}}
+                </div> 
+                <div class="col-sm-3 col-md-2 col-lg-3">
+                  {{t.priority}}
+                </div>  
+                <div *ngIf="t.image?.length>0" class="col-sm-3 col-md-2 col-lg-3">
+                  <img [src]="t.image" height="150px" width="150px">
+                </div> 
+        
+                         
+              
+          
+            
+            <div class="todo-controls-box" >
+              <div class="todo-control-button" appToolTip="Edit Todo" >
+                <i class="material-icons" (click)="toEdit(t)">edit</i>
+              </div>
+              <div class="todo-control-button is-danger" appToolTip="Delete Todo" >
+               <i class="material-icons" (click)="deleteTask(t.taskid)">delete</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pagination">
+      <pagination-controls  class="pages"(pageChange)="p=$event"></pagination-controls>
+    </div> 
+  </section>
+  
+  <div class="modalbox">
+    <div class="modal"  role="dialog"  [ngStyle]="{'display':display}"  style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           
+          <div class="modal-header">
+            <h4 class="modal-title">Incompleted task</h4>
+            
+          </div>
+          <div class="modal-body" *ngIf="isBadgeHidden" >
+            <mat-list role="list"*ngFor="let i of incomplete">
+              <mat-list-item role="listitem">{{i.title}} is incomplete.</mat-list-item><br>
+            </mat-list>
+          
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+          </div>
+        </div>
+      </div>
+     </div>
+  </div>
+ 
+ 
+  <div>
+    <footer class="footer-section">
+      <div class="d-flex
+                    justify-content-center
+                    align-items-center
+                    p-2
+                    copyright-section">
+        <p class="p-1 mt-3" style="color: white;">Copyright © 2022 TO-DO</p>
+        <a class="p-1" style="color: rgb(248, 238, 238);" href="">Security</a>
+        <a class="p-1" style="color: rgb(247, 234, 234);" routerLink="/privacy">Privacy Policy</a>
+      </div>
+    </footer>
+  </div>

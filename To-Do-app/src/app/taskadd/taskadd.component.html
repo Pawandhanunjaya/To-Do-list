@@ -1,0 +1,94 @@
+<mat-toolbar style="background-color: rgba(0, 0, 0, 0.734);">
+ 
+  <img src="../../assets/img/download (3).png" style="width: 50px; border-radius: 50%;" >
+  <h3 style="color:white">&nbsp;&nbsp;To-do List App</h3>
+
+    <span class="example-spacer"></span>
+ <button mat-icon-button type="button" routerLink="../todo" data-bs-toggle="tooltip" title="back">
+    <mat-icon >arrow_back</mat-icon> 
+  </button>
+</mat-toolbar>
+
+
+
+<section class="heading-section">
+    <h1 class="title is-1 has-text-centered"  style="font-size:50px;font-weight:700; color: lightblue;">Todo</h1>
+  </section>
+   <div class="container add-todo-box-container">
+      <div class="add-todo-box">
+        <form [formGroup]="TodoForm" (ngSubmit)="addTask()">
+          <h2 class="title is-5">New Todo</h2>
+          <div class="field is-grouped" style="margin: 0">
+            <div class="control">
+              <input  name="text"  formControlName="taskid" class="input" type="text" placeholder="Type todo Id ...">
+              <div *ngIf="taskid.invalid && taskid.touched" class="alert alert-danger">
+              
+                <div *ngIf="taskid.errors?.['required']" >
+                 Taskid is must
+                </div>
+                
+             </div>
+            </div>
+           
+            <p class="control ">
+              <input  name="text" formControlName="title" class="input" type="text" placeholder="Type todo title ...">
+            </p>
+            <div class="control ">
+              <input  name="text" [min]="todayDate" formControlName="date" class="input" type="date" placeholder="Type todo end date">
+              <div *ngIf="date.invalid && date.touched" class="alert alert-danger">
+              
+                <div *ngIf="date.errors?.['required']" >
+                  Date is must
+                </div>
+                
+             </div>
+            </div>
+            
+            <div class="select is-normal control  ">
+              
+              <select formControlName="priority">
+                
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+              </select>
+              <div *ngIf="priority.invalid && priority.touched" class="alert alert-danger">
+              
+                <div *ngIf="priority.errors?.['required']" >
+                  Priority is must
+                </div>
+                
+             </div>
+            </div>
+           
+          </div>
+          <br>
+          <div class="field is-grouped">
+            <p class="control" >
+              <input  name="text" class="input" type="file" placeholder="Image" (change)="onuploadimage($event)">
+            </p>
+            <p class="control ">
+              <button type="submit" class="button alt-gradient-button" [disabled]="TodoForm.invalid"  >
+                <i class="material-icons">add</i>
+                Add
+              </button>
+              
+            </p>
+            <div class="control">
+                <button type="button" class="button is-light" type="button" routerLink="../todo">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <footer class="footer-section" >
+        <div class="d-flex
+        justify-content-center
+        align-items-center
+        p-2
+        copyright-section">
+        <p class="p-1 mt-3" style="color: white;">Copyright © 2022 TO-DO</p>
+        <a class="p-1" href="">Security</a>
+        <a class="p-1" routerLink="/privacy">Privacy Policy</a>
+        </div>
+      </footer>
+    </div> 

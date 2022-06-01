@@ -1,0 +1,87 @@
+<mat-toolbar style=" background: linear-gradient(to right, rgb(83, 208, 177), rgb(201, 237, 243));">
+ 
+  <img src="../../assets/img/download (3).png" style="width: 50px; border-radius: 50%;" routerLink="">
+  <h3 style="color:white">&nbsp;&nbsp;To-do  App</h3>
+
+    <span class="example-spacer"></span>
+    <button mat-icon-button type="button" routerLink="/register"  data-bs-toggle="tooltip" title="Sign-up">
+      <mat-icon color="accent">person_add</mat-icon>
+    </button>
+    <button mat-icon-button type="button" routerLink="/login"  data-bs-toggle="tooltip" title="Sign-In">
+      <mat-icon color="primary">login</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="fluid-container" >
+  <br>
+  <h1 style="text-align: center; color:lightblue; font-size:30px;font-weight:700;">Sign-up</h1><br>
+
+  <mat-card>
+      <div class="registerForm" mat-card-content>
+          <form [formGroup]="registerForm" (ngSubmit)="register()">
+              <mat-form-field appearance="standard">
+                  <mat-label for ="username">User Name</mat-label>
+                  <input matInput type="text" formControlName="username">
+                  
+              </mat-form-field>
+              <div *ngIf="username.invalid && username.touched" class="alert alert-danger">
+                <div *ngIf="username.errors?.['required']" >
+                    User Name is must
+                </div>
+                <div *ngIf="username.errors?.['minlength']" >
+                User Name is not valid
+                </div>
+            </div>
+              <br>
+              <mat-form-field appearance="standard">
+                  <mat-label>Password</mat-label>
+                  <input matInput type="text" formControlName="password">
+                  
+              </mat-form-field>
+              <div *ngIf="password.invalid && password.touched" class="alert alert-danger">
+                <div *ngIf="password.errors?.['required']" >
+                  Password is must
+                </div>
+                <div *ngIf="password.errors?.['minlength']" >
+                Password is not valid
+                </div>
+              </div>
+              <br>
+              <mat-form-field appearance="standard">
+                  <mat-label>Email Id</mat-label>
+                  <input matInput type="text" formControlName="email">
+                  
+              </mat-form-field>
+              <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+                <div *ngIf="email.errors?.['required']" >
+                 Email Id is must
+                </div>
+                <div *ngIf="username.errors?.['minlength']" >
+                  Email Id not valid
+                </div>
+            </div>
+              <br>
+              <button mat-raised-button [disabled]="registerForm.invalid" class="button alt-gradient-button" type="submit">Register</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <br><br>
+            Already existing user click <a routerLink="/login">here</a> for login!
+          </form>
+      
+      </div>
+  </mat-card>
+</div>
+<div>
+  <footer class="footer-section" style=" background: linear-gradient(to right, rgb(188, 243, 229), rgb(201, 237, 243));">
+  
+
+    <div class="d-flex
+                  justify-content-center
+                  align-items-center
+                  p-2
+                  copyright-section">
+      <p class="p-1 mt-3">Copyright © 2022 TO-DO</p>
+      <a class="p-1" href="">Security</a>
+      <a class="p-1" routerLink="/privacy">Privacy Policy</a>
+    </div>
+  </footer>
+</div>
+

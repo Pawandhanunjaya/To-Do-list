@@ -1,0 +1,30 @@
+mat-card{
+    width:350px;
+    height:auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+    /* background: linear-gradient(to right, rgb(188, 243, 229), rgb(201, 237, 243)); */
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .img1{
+     margin-left: 22%;
+     margin-top: 3%;
+     /* width:400px; */
+     /* height: 350px; */
+    }
+    .fluid-container{
+        background-color: rgba(0, 0, 0, 0.684);
+       width: 100%;
+       align-items: center;
+       }
+
+     
+    
+    body{
+        /* background-color:aliceblue; */
+        background-color:#5c5c5c;
+    }

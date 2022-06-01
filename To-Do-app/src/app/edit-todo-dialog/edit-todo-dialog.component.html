@@ -1,0 +1,69 @@
+<mat-toolbar style="background-color: rgba(0, 0, 0, 0.734);">
+ 
+    <img src="../../assets/img/download (3).png" style="width: 50px; border-radius: 50%;" >
+    <h3 style="color:white">&nbsp;&nbsp;To-do List App</h3>
+  ​
+      <span class="example-spacer"></span>
+   <button mat-icon-button type="button" routerLink="../todo" data-bs-toggle="tooltip" title="back">
+      <mat-icon >arrow_back</mat-icon> 
+    </button>
+  </mat-toolbar>
+  <section class="heading-section">
+    <h1 class="title is-1 has-text-centered" style="font-size:50px;font-weight:700; color: lightblue;">Edit Todo</h1>
+  </section>
+    <div class="container add-todo-box-container">
+        <div class="add-todo-box">
+            <form [formGroup]="TodoForm" (ngSubmit)="updateTask()">
+                <div class="field" >
+                    <div class="control ">
+                        <input  name="text" class="input" type="text" placeholder="Type todo title ..." formControlName="title" >
+                        
+                    </div>
+                    <br>
+                    <div class="control ">
+                       
+                        <input  name="text" [min]="minDate"  class="input" type="date" placeholder="Type todo end date" formControlName="date">
+                    </div>
+                    <br>
+                    <div class="select is-normal control"  >
+                        <select formControlName="priority">
+                           
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                        </select>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="control">
+                        <i class="material-icons">image <input  name="text" class="input" type="file" (change)="onuploadimage($event)">
+                        </i>
+                    </div >
+                </div>
+                <br>
+                <div class="field is-grouped is-grouped-right">
+                    <div class="control">
+                        <button type="button" class="button is-light" type="button" routerLink="../todo">Cancel</button>
+                    </div>
+                    <div class="control">
+                        <button type="submit" class="button alt-gradient-button" type="submit">
+                            <i class="material-icons">save</i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+    <footer class="footer-section" >
+        <div class="d-flex
+                      justify-content-center
+                      align-items-center
+                      p-2
+                      copyright-section">
+          <p class="p-1 mt-3" style="color: white;">Copyright © 2022 TO-DO</p>
+          <a class="p-1" href="">Security</a>
+          <a class="p-1" routerLink="/privacy">Privacy Policy</a>
+        </div>
+      </footer>
